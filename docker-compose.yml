@@ -1,0 +1,22 @@
+services:
+  Data_Api:
+    build: ./Data_Api
+    container_name: Data_Api
+    ports:
+      - "5000:5000"
+    networks:
+      - stock-net
+
+  stock:
+    build: ./stock
+    container_name: stock
+    ports:
+      - "8050:8050"
+    depends_on:
+      - Data_Api
+    networks:
+      - stock-net
+
+networks:
+  stock-net:
+    driver: bridge
