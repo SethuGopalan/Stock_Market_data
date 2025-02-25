@@ -57,7 +57,7 @@ def Stock_extract(ticker_value,time_p_value,intervel_value,n_clicks=0):
     if ticker_value is None or time_p_value is None or intervel_value is None:
         return "plaese provide all the values"
     try:
-        response=requests.get('http://127.0.0.1:8000/stock-data',params={"tickers":ticker_value,'time_period':time_p_value,'data_intervel':intervel_value})
+        response=requests.get('http://Data_Api:5000/stock-data',params={"tickers":ticker_value,'time_period':time_p_value,'data_intervel':intervel_value})
 
         if response.status_code ==200:
             data=response.json()
