@@ -8,4 +8,4 @@ RUN pip install fastapi yfinance
 
 EXPOSE 5000
 
-CMD [ "python", "YahooFin_api.py" ]
+CMD [ "uvicorn", "YahooFin_Api:app", "--host", "0.0.0.0", "--port", "5000" ]
