@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-
+# login to docker hub and create and push docker image
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -25,3 +25,25 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/backend-app:latest ./backend
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend-app:latest
+# create Ec2 instance with terraform
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Initialize Terraform
+        working-directory: terraform
+        run: terraform init
+      - name: validate Terraform
+        working-directory: terraform
+        run: terraform validate
+      - name: Plan Terraform
+        working-directory: terraform
+        run: terraform plan
+      - name: Apply Terraform
+        working-directory: terraform
+        run: terraform apply -auto-approve
