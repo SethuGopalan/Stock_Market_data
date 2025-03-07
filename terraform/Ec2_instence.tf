@@ -2,12 +2,9 @@ terraform {
   required_providers {
     aws = {
       source  = "hashcorp/aws"
-      version = "3.76.1"
-    }
-    tls = {
-      source  = "hashcorp/aws"
       version = "4.0.6"
     }
+
   }
 }
 
