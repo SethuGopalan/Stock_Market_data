@@ -6,6 +6,7 @@ on:
       - master
 jobs:
   build-and-push:
+    environment: EC2-Deployment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -18,12 +19,12 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and Push Frontend Image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend-app:latest ./frontend
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend-app:latest ./Stock
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend-app:latest
       
       - name: Build and Push Backend Image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/backend-app:latest ./backend
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/backend-app:latest ./Data_Api
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend-app:latest
 # create Ec2 instance with terraform
   deploy:
